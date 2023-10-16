@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project Hub</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="projects">
+                <div class="projects-title">Project List</div>
+                <div class="project-list">
+                    <div class="project-selectable unselected">
+                        Hacker Online
+                    </div>
+                    <div class="project-selectable unselected">Simulator</div>
+                </div>
+            </div>
+            <div class="project-wrapper">
+                <div
+                    class="project-container project-container-hide"
+                    id="project-container"
+                >
+                    <div class="project-header">
+                        <div class="project-title" id="project-title"></div>
+                        <div
+                            class="project-graph-toggle"
+                            id="project-graph-toggle"
+                        >
+                            <p class="left" id="toggle-text">Bar</p>
+                            <p class="right" id="toggle-text">Line</p>
+                            <div
+                                class="project-graph-toggle-bar"
+                                id="toggle-bar"
+                            >
+                                Bar
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-graph-container">
+                        <div class="graph">
+                            <canvas id="views"></canvas>
+                        </div>
+                        <div class="graph">
+                            <canvas id="downloads"></canvas>
+                        </div>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-view-btn">View Project</div>
+                        <div class="download-container">
+                            <div class="project-download-btn" id="project-download-btn">
+                                Download
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="0.75em"
+                                    viewBox="0 0 512 512"
+                                >
+                                    <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <style>
+                                        svg {
+                                            fill: #b3cfdf;
+                                        }
+                                    </style>
+                                    <path
+                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="dropdown" id="dropdown" style="display: none;">
+                                <div class="dropdown-btn">.csv</div>
+                                <div class="dropdown-btn">.json</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="select-text" id="select-text">Select a Project</h5>
+            </div>
+        </div>
+        <script src="global.js"></script>
+        <script src="functions.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

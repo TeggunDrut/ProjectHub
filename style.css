@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css?family=Pompiere:700|Pompiere:400");
+
+body {
+    font-family: "Pompiere";
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Pompiere";
+    font-weight: 700;
+}
+
+html {
+    font-size: 100%;
+} /* 16px */
+
+h1 {
+    font-size: 4.21rem; /* 67.36px */
+}
+
+h2 {
+    font-size: 3.158rem; /* 50.56px */
+}
+
+h3 {
+    font-size: 2.369rem; /* 37.92px */
+}
+
+h4 {
+    font-size: 1.777rem; /* 28.48px */
+}
+
+h5 {
+    font-size: 1.333rem; /* 21.28px */
+}
+
+small {
+    font-size: 0.75rem; /* 12px */
+}
+
+:root {
+    --text: rgb(29, 18, 12);
+    --background: rgb(246, 238, 233);
+    --primary: rgb(179, 207, 223);
+    --secondary: rgb(240, 227, 219);
+    --accent: rgb(36, 145, 204);
+
+    --text-d: rgb(243, 232, 226);
+    --background-d: rgb(22, 14, 9);
+    --primary-d: rgb(32, 59, 76);
+    --secondary-d: rgb(36, 23, 15);
+    --accent-d: rgb(51, 160, 219);
+
+    --bg: #eee7e2;
+}
+
+html,
+body {
+    background-color: var(--background);
+    color: var(--text);
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+
+.projects {
+    background-color: var(--bg);
+}
+
+.projects-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem;
+    text-align: center;
+}
+
+.select-text {
+    width: max-content;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.projects-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-selectable {
+    min-height: 20px;
+    max-height: 20px;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--accent);
+    opacity: 0.6;
+}
+
+.selected {
+    opacity: 1;
+    background-color: var(--primary);
+    color: var(--text);
+    transition: 0.2s;
+}
+
+.project-selectable:hover {
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.project-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.project-container {
+    width: 95%;
+    height: 95%;
+
+    border: 1px solid var(--secondary);
+
+    display: grid;
+    grid-template-rows: min-content 50%;
+}
+.project-container-show {
+    display: grid;
+}
+.project-container-show > * {
+    display: inline-block;
+}
+.project-container-hide {
+    display: none;
+}
+.project-container-hide > * {
+    display: none;
+}
+
+.project-header {
+    position: relative;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.project-title {
+    text-decoration: underline;
+}
+.project-graph-toggle {
+    width: 200px;
+    height: 40px;
+    background-color: var(--secondary);
+    position: absolute;
+    right: 0;
+}
+
+.project-graph-toggle > .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 100px;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.project-graph-toggle > .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 100px;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.project-graph-toggle-bar {
+    width: 100px;
+    height: 40px;
+    background-color: var(--accent);
+    position: absolute;
+    transition: 0.2s;
+
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+.graph-selected {
+    animation: slide-right 200ms ease-in-out forwards;
+}
+.graph-deselected {
+    animation: slide-left 200ms ease-in-out forwards;
+}
+
+@keyframes slide-left {
+    0% {
+        right: 0px;
+    }
+    100% {
+        right: 100px;
+    }
+}
+@keyframes slide-right {
+    0% {
+        right: 100px;
+    }
+    100% {
+        right: 0px;
+    }
+}
+
+.project-graph-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.graph {
+    width: 100%;
+    height: 100%;
+}
+.graph > canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.project-footer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem;
+    text-align: center;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.download-container {
+    width: 200px;
+    height: max-content;
+}
+
+.project-view-btn,
+.project-download-btn {
+    width: 200px;
+    height: 40px;
+    background-color: var(--accent);
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    cursor: pointer;
+}
+.project-download-btn > svg {
+    color: var(--primary);
+    font-size: 1.5rem;
+
+    margin-left: 0.5rem;
+}
+
+.project-view-btn:hover,
+.project-download-btn:hover {
+    box-shadow: 0px 0px 5px 0px var(--accent);
+    transition: 0.2s;
+}
+
+.project-view-btn:active,
+.project-download-btn:active {
+    box-shadow: 0px 0px 0px 0px var(--accent);
+    transition: 0.2s;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    width: 200px;
+    height: 40px;
+    background-color: var(--accent);
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    cursor: pointer;
+}
+.dropdown-btn:hover,
+.project-download-btn:hover {
+    box-shadow: 0px 0px 5px 0px var(--accent);
+    transition: 0.2s;
+}
+
+.dropdown-btn:active,
+.project-download-btn:active {
+    box-shadow: 0px 0px 0px 0px var(--accent);
+    transition: 0.2s;
+}
