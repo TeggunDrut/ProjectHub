@@ -96,10 +96,12 @@ body {
     margin: auto;
 }
 
-.projects-list {
+.project-list {
+    height: calc(100vh - 100px);
     list-style-type: none;
     padding: 0;
     margin: 0;
+    overflow-y: scroll;
 }
 
 .project-selectable {
@@ -111,6 +113,12 @@ body {
     cursor: pointer;
     border-bottom: 1px solid var(--accent);
     opacity: 0.6;
+
+    font-size: 1.5rem;
+
+    overflow: hidden;
+    white-space: nowrap; /* Don't forget this one */
+    text-overflow: ellipsis;
 }
 
 .selected {

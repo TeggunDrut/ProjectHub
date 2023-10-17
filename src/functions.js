@@ -111,6 +111,12 @@ function drawLineGraph(canvas, ctx, data) {
     }
 }
 function drawGraphs(type, vdata, ddata) {
+    if (vdata === null || vdata === undefined) {
+        vdata = [];
+    }
+    if (ddata === null || ddata === undefined) {
+        ddata = [];
+    }
     vtx.clearRect(0, 0, views.width, views.height);
     dtx.clearRect(0, 0, downloads.width, downloads.height);
 
@@ -126,7 +132,7 @@ function drawGraphs(type, vdata, ddata) {
             drawLineGraph(downloads, dtx, ddata);
     }
 }
-function changeProjet(index, project) {
+function changeProject(index, project) {
     currentSelected = index;
     const container = document.getElementById("project-container");
     if (index === 0) {
@@ -134,6 +140,7 @@ function changeProjet(index, project) {
         text.style.display = "inline-block";
         container.classList.add("project-container-hide");
         container.classList.remove("project-container-show");
+        return;
     } else {
         container.classList.add("project-container-show");
         container.classList.remove("project-container-hide");
@@ -142,8 +149,22 @@ function changeProjet(index, project) {
         const title = document.getElementById("project-title");
         title.innerText = project.innerText;
     }
+
+    let dataArr = [];
+    // get dates
+    if (window.projectData !== null && window.projectData !== undefined) {
+        for (const date of window.projectData) {
+            let links = date.links;
+            for (const link of Object.keys(links)) {
+                if (link.replaceAll("%20", " ") === project.innerText) {
+                    dataArr.push(links[link]);
+                }
+            }
+        }
+    }
+
     resetCanvas();
-    drawGraphs(graphType, vdata, ddata);
+    drawGraphs(graphType, dataArr, null);
 }
 document.getElementById("project-graph-toggle").onclick = function (e) {
     e.preventDefault();
@@ -163,15 +184,23 @@ document.getElementById("project-graph-toggle").onclick = function (e) {
         toggleBar.innerText = "Line";
         graphType = 1;
     }
-    drawGraphs(graphType, vdata, ddata);
+    changeProject(currentSelected, projects[currentSelected - 1]);
 };
-window.onload = () => {
+async function wait(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
+window.onload = async () => {
+    await wait(300);
     projects = document.getElementsByClassName("project-selectable");
     projects = Array.from(projects);
+    console.log(projects);
     for (const project of projects) {
         project.onclick = () => {
             if (project.classList.contains("unselected")) {
-                changeProjet(projects.indexOf(project) + 1, project);
+                changeProject(projects.indexOf(project) + 1, project);
                 project.classList.add("selected");
                 project.classList.remove("unselected");
 
@@ -184,12 +213,12 @@ window.onload = () => {
             } else if (project.classList.contains("selected")) {
                 project.classList.add("unselected");
                 project.classList.remove("selected");
-                changeProjet(0, null);
+                changeProject(0, null);
             }
         };
     }
     if (currentSelected) {
-        changeProjet(currentSelected, projects[currentSelected - 1]);
+        changeProject(currentSelected, projects[currentSelected - 1]);
     }
 };
 

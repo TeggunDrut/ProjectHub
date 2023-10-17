@@ -11,10 +11,10 @@
             <div class="projects">
                 <div class="projects-title">Project List</div>
                 <div class="project-list">
-                    <div class="project-selectable unselected">
+                    <!-- <div class="project-selectable unselected">
                         Hacker Online
                     </div>
-                    <div class="project-selectable unselected">Simulator</div>
+                    <div class="project-selectable unselected">Simulator</div> -->
                 </div>
             </div>
             <div class="project-wrapper">
@@ -89,11 +89,13 @@
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
             import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
+            import { getDatabase } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+            import {
+                set,
+                ref,
+                get,
+            } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
             const firebaseConfig = {
                 apiKey: "AIzaSyAnCVDDAwpgPHqiRhn0G61emypC3s5Zw_o",
                 authDomain: "tdprojecthub.firebaseapp.com",
@@ -102,13 +104,80 @@
                 messagingSenderId: "989245812111",
                 appId: "1:989245812111:web:ff4d83f814d15481ab6ffa",
                 measurementId: "G-BJN52JFF4D",
+                datbaseURL: "https://tdprojecthub-default-rtdb.firebaseio.com/",
             };
 
-            // Initialize Firebase
             const app = initializeApp(firebaseConfig);
             const analytics = getAnalytics(app);
+            const db = getDatabase(app);
 
+            let ProjectNames = [
+                "Hacker Online",
+                "Simulator",
+                "Coding Challenges",
+                "NN",
+                "OpenGL Demo",
+                "project-5v5 game",
+                "project-AudioVisualizer",
+                "project-AutomationGame",
+                "project-BloxyBingo",
+                "project-CardGame",
+                "project-ExerciseApp",
+                "project-GambleSimulater",
+                "project-HackerOnline",
+                "project-Node-Based-Hardware-Simulation",
+                "project-NoteTakingApp",
+                "project-SandSimulation",
+                "project-Tech-Tycoon-2",
+                "project-wavefunctioncollapse3d",
+                "root",
+            ];
+
+            async function wait(ms) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+            }
             
+            // get all projects
+            async function refreshProjectData() {
+                let e = await get(ref(db, "/ProjectNames"));
+                let val = e.val();
+                for (const v of Object.values(val)) {
+                    console.log(v.name);
+                }
+
+                const date = await get(ref(db, "/"));
+                const dateVal = date.val();
+                delete dateVal.ProjectNames;
+
+                let dates = [];
+                for (const d in dateVal) {
+                    dates.push({date: d, links: dateVal[d].links});
+                }
+
+                dates.sort((a, b) => {
+                    return new Date(a) - new Date(b);
+                });
+
+                console.log(dates);
+
+                window.projectData = dates;
+            }
+
+
+            const projectList = document.querySelector(".project-list");
+            for (const project in ProjectNames) {
+                const projectSelectable = document.createElement("div");
+                projectSelectable.classList.add("project-selectable");
+                projectSelectable.classList.add("unselected");
+                projectSelectable.innerHTML = ProjectNames[project];
+                projectList.appendChild(projectSelectable);
+            }
+
+            refreshProjectData();
+
+            // for(const name of names) {
+            //     set(ref(db, "ProjectNames/" + name), {name: name});
+            // }
         </script>
 
         <script src="global.js"></script>
