@@ -1,4 +1,3 @@
-let projects;
 let currentSelected = 0;
 
 const toggleText = document.getElementById("toggle-text");

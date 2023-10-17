@@ -166,6 +166,8 @@ function changeProject(index, project) {
 
     resetCanvas();
     drawGraphs(graphType, dataArr, null);
+
+    window.history.pushState('beans', 'Title', '/src/index.html?=' + currentSelected);
 }
 document.getElementById("project-graph-toggle").onclick = function (e) {
     e.preventDefault();
@@ -217,8 +219,11 @@ window.onload = async () => {
             }
         };
     }
-    if (currentSelected) {
-        changeProject(currentSelected, projects[currentSelected - 1]);
+    if (location.search.length > 0) {
+        const data = location.search.split("?=")[1];
+        changeProject(data, projects[data - 1]);
+        projects[data-1].classList.add("selected");
+        projects[data-1].classList.remove("unselected");
     }
 };
 
@@ -236,8 +241,8 @@ window.onresize = function () {
 document.getElementById("view-project").onclick = function (e) {
     // get current selected
     console.log(projects[currentSelected - 1].innerText);
-    location.href =
-        "TDFileExplorer/src/" +
+    location.pathname =
+        "src/TDFileExplorer/Projects/" +
         projects[currentSelected - 1].innerText.replaceAll(" ", "%20") +
         "/_.html";
 };
