@@ -232,4 +232,12 @@ document.getElementById("project-download-btn").onclick = function (e) {
 window.onresize = function () {
     resetCanvas();
     drawGraphs(graphType, null, null);
-}
+};
+document.getElementById("view-project").onclick = function (e) {
+    // get current selected
+    console.log(projects[currentSelected - 1].innerText);
+    location.href =
+        "TDFileExplorer/src/" +
+        projects[currentSelected - 1].innerText.replaceAll(" ", "%20") +
+        "/_.html";
+};
