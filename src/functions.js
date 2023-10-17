@@ -132,6 +132,7 @@ function drawGraphs(type, vdata, ddata) {
             drawLineGraph(downloads, dtx, ddata);
     }
 }
+// ziudhasy8dgas97y8dtas7dtgas68drasd
 function changeProject(index, project) {
     currentSelected = index;
     const container = document.getElementById("project-container");
@@ -196,7 +197,6 @@ window.onload = async () => {
     await wait(300);
     projects = document.getElementsByClassName("project-selectable");
     projects = Array.from(projects);
-    console.log(projects);
     for (const project of projects) {
         project.onclick = () => {
             if (project.classList.contains("unselected")) {
@@ -228,3 +228,8 @@ document.getElementById("project-download-btn").onclick = function (e) {
         document.getElementById("dropdown").style.display = "none";
     } else document.getElementById("dropdown").style.display = "inline-block";
 };
+
+window.onresize = function () {
+    resetCanvas();
+    drawGraphs(graphType, null, null);
+}

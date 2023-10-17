@@ -136,13 +136,12 @@
             async function wait(ms) {
                 return new Promise((resolve) => setTimeout(resolve, ms));
             }
-            
+
             // get all projects
             async function refreshProjectData() {
                 let e = await get(ref(db, "/ProjectNames"));
                 let val = e.val();
                 for (const v of Object.values(val)) {
-                    console.log(v.name);
                 }
 
                 const date = await get(ref(db, "/"));
@@ -151,18 +150,15 @@
 
                 let dates = [];
                 for (const d in dateVal) {
-                    dates.push({date: d, links: dateVal[d].links});
+                    dates.push({ date: d, links: dateVal[d].links });
                 }
 
                 dates.sort((a, b) => {
                     return new Date(a) - new Date(b);
                 });
 
-                console.log(dates);
-
                 window.projectData = dates;
             }
-
 
             const projectList = document.querySelector(".project-list");
             for (const project in ProjectNames) {
@@ -174,13 +170,9 @@
             }
 
             refreshProjectData();
-
-            // for(const name of names) {
-            //     set(ref(db, "ProjectNames/" + name), {name: name});
-            // }
         </script>
-
         <script src="global.js"></script>
+        <!-- dbosuydgasuydgas87dasf8d76astdfb76 -->
         <script src="functions.js"></script>
         <script src="main.js"></script>
     </body>
