@@ -167,7 +167,7 @@ function changeProject(index, project) {
     resetCanvas();
     drawGraphs(graphType, dataArr, null);
 
-    window.history.pushState('beans', 'Title', '/src/index.html?=' + currentSelected);
+    window.history.pushState('beans', 'Title', '?=' + currentSelected);
 }
 document.getElementById("project-graph-toggle").onclick = function (e) {
     e.preventDefault();
@@ -242,7 +242,7 @@ document.getElementById("view-project").onclick = function (e) {
     // get current selected
     console.log(projects[currentSelected - 1].innerText);
     location.pathname =
-        "src/TDFileExplorer/Projects/" +
+        "TDFileExplorer/Projects/" +
         projects[currentSelected - 1].innerText.replaceAll(" ", "%20") +
         "/_.html";
 };
